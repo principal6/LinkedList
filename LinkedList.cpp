@@ -46,6 +46,7 @@ void LinkedList::Pop()
 {
 	if (m_pHead == m_pTail)
 	{
+		// Our last survivor says goodbye here
 		delete m_pHead;
 		Clear();
 		return;
@@ -65,11 +66,11 @@ void LinkedList::Pop()
 	}
 }
 
-void LinkedList::Insert(int Index, int Data)
+void LinkedList::InsertAt(int ID, int Data)
 {
-	if (Index == 0)
+	if (ID == 0)
 	{
-		// If the index is 0, then the head gets shifted a block to the right and a new head is inserted
+		// Insert a node before the former head
 		Node* tempNode = m_pHead;
 		m_pHead = new Node(Data);
 		m_pHead->pNext = tempNode;
@@ -77,14 +78,14 @@ void LinkedList::Insert(int Index, int Data)
 		return;
 	}
 
-	if ((Index > 0) && (Index < m_Length))
+	if ((ID > 0) && (ID < m_Length))
 	{
 		Node* iterator = m_pHead;
 		int iterator_count = 0;
 
 		while (iterator)
 		{
-			if ((iterator_count + 1) == Index)
+			if ((iterator_count + 1) == ID)
 			{
 				Node* tempNode = iterator->pNext;
 				iterator->pNext = new Node(Data);
@@ -98,11 +99,11 @@ void LinkedList::Insert(int Index, int Data)
 	}
 }
 
-void LinkedList::Delete(int Index)
+void LinkedList::RemoveAt(int ID)
 {
-	if (Index == 0)
+	if (ID == 0)
 	{
-		// Delete the head
+		// Remove the head
 		Node* tempNode = m_pHead->pNext;
 		delete m_pHead;
 		m_pHead = tempNode;
@@ -110,7 +111,7 @@ void LinkedList::Delete(int Index)
 		return;
 	}
 
-	if ((Index > 0) && (Index < m_Length))
+	if ((ID > 0) && (ID < m_Length))
 	{
 		Node* iterator = m_pHead->pNext;
 		Node* iterator_prev = m_pHead;
@@ -118,7 +119,7 @@ void LinkedList::Delete(int Index)
 
 		while (iterator)
 		{
-			if (iterator_id == Index)
+			if (iterator_id == ID)
 			{
 				Node* tempNode = iterator->pNext;
 				delete iterator;
@@ -138,13 +139,55 @@ void LinkedList::Print() const
 {
 	Node* iterator = m_pHead;
 
-	std::cout << "LinkedList (Length = ";
-	std::cout << m_Length;
-	std::cout << "): ";
+	std::cout << "# LinkedList (Length = " << m_Length << ") ";
 	while (iterator)
 	{
 		std::cout << "<" << iterator->Data << "> ";
 		iterator = iterator->pNext;
 	}
 	std::cout << std::endl;
+}
+
+bool LinkedList::IsEmpty() const
+{
+	// Returns true if the list is empty
+	return m_pHead == nullptr;
+}
+
+int LinkedList::GetIDWith(int Value) const
+{
+	// Returns the node's ID that has a specific value
+	Node* iterator = m_pHead;
+	int iterator_id = 0;
+
+	while (iterator)
+	{
+		if (iterator->Data == Value)
+		{
+			return iterator_id;
+		}
+		iterator = iterator->pNext;
+		iterator_id++;
+	}
+
+	return -1;
+}
+
+int LinkedList::GetDataAt(int ID) const
+{
+	// Returns the node's data that has a specific index
+	Node* iterator = m_pHead;
+	int iterator_id = 0;
+
+	while (iterator)
+	{
+		if (iterator_id == ID)
+		{
+			return iterator->Data;
+		}
+		iterator = iterator->pNext;
+		iterator_id++;
+	}
+
+	return -1;
 }

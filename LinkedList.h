@@ -26,9 +26,12 @@ public:
 
 	void LinkedList::Push(int Data);
 	void LinkedList::Pop();
-
-	void LinkedList::Insert(int Index, int Data);
-	void LinkedList::Delete(int Index);
+	void LinkedList::InsertAt(int ID, int Data);
+	void LinkedList::RemoveAt(int ID);
 
 	void LinkedList::Print() const;
+
+	bool LinkedList::IsEmpty() const;
+	int LinkedList::GetIDWith(int Value) const;
+	int LinkedList::GetDataAt(int ID) const;
 };

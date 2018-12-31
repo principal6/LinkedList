@@ -14,12 +14,18 @@ int main()
 	myLinkedList.Pop();
 	myLinkedList.Pop();
 
-	myLinkedList.Insert(0, 0);
-	myLinkedList.Insert(2, 2);
+	myLinkedList.InsertAt(0, 0);
+	myLinkedList.InsertAt(2, 2);
 
-	myLinkedList.Delete(3);
+	myLinkedList.RemoveAt(3);
 
 	myLinkedList.Print();
+
+	int findByID = 3;
+	std::cout << "# Data at ID " << findByID << ": <" << myLinkedList.GetDataAt(findByID) << ">" << std::endl;
+
+	int findByData = 5;
+	std::cout << "# ID with <" << findByData << "> : " << myLinkedList.GetIDWith(findByData) << std::endl;
 
 	system("pause");
 	return 0;
