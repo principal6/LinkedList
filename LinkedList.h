@@ -2,17 +2,17 @@
 
 #include <iostream>
 
+struct Node
+{
+	Node* pNext;
+	int Data;
+
+	Node() : pNext(nullptr), Data(0) {};
+	Node(int _Data) : pNext(nullptr), Data(_Data) {};
+};
+
 class LinkedList
 {
-	struct Node
-	{
-		Node* pNext;
-		int Data;
-
-		Node() : pNext(nullptr), Data(0) {};
-		Node(int _Data) : pNext(nullptr), Data(_Data) {};
-	};
-
 private:
 	Node* m_pHead;
 	Node* m_pTail;
